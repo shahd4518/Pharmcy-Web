@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cart</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: rgb(0, 228, 84);
+      padding: 20px;
+    }
+    .navbar {
+      background-color: rgb(0, 228, 84);
+      padding: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="products.html">Products</a>
+    <a href="cart.html">Cart</a>
+    <a href="checkout.html">Checkout</a>
+    <a href="account.html">My Account</a>
+  </div>
+
+  <h2>Your Cart</h2>
+  <ul id="cartList"></ul>
+  <script>
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartList = document.getElementById("cartList");
+
+    if (cart.length === 0) {
+      cartList.innerHTML = "<li>Your cart is empty.</li>";
+    } else {
+      cart.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.name} - ${item.price} EGP`;
+        cartList.appendChild(li);
+      });
+    }
+  </script>
+
+</body>
+</html>

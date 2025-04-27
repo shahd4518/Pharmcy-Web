@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+    background-image:url('OIP.jpg') ;
+    background-size: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .login-container {
+      background-color: rgb(226, 242, 232);
+      padding: 55px;
+      border-radius: 25px;
+      display: block;
+    }
+    input, button {
+      display: block;
+      width: 100%;
+      margin: 15px ;
+      padding: 10px;
+    }
+    .register-link {
+      text-align: center;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>Login</h2>
+    <form onsubmit="login(event)">
+      <input type="email" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+    <div class="register-link">
+      <p>Don't have an account? <a href="sign up.html">Register</a></p>
+    </div>
+  </div>
+
+  <script>
+    function login(event) {
+      event.preventDefault();
+      alert("Login successful (demo)");
+      window.location.href = "products.html";
+    }
+  </script>
+</body>
+</html>

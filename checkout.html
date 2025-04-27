@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Checkout</title>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: rgb(225, 233, 228);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px;
+    }
+    .navbar {
+        background-color: rgb(245, 246, 245);
+        padding: 15px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 30px;
+    }
+    .checkout-container {
+        background: rgb(235, 240, 237);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgb(250, 255, 252);
+        width: 300px;
+    }
+    .checkout-container input {
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid rgb(233, 237, 235);
+        border-radius: 5px;
+    }
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: rgb(1, 16, 6);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        text-align: center;
+    }
+    .success {
+        margin-top: 20px;
+        color: rgb(0, 0, 0);
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+<div class="navbar">
+    <a href="products.html">Products</a>
+    <a href="cart.html">Cart</a>
+    <a href="checkout.html">Checkout</a>
+    <a href="account.html">My Account</a>
+</div>
+<div class="checkout-container">
+    <h2>Checkout</h2>
+    <form onsubmit="confirmOrder(event)">
+        <input type="text" placeholder="Full Name" required>
+        <input type="text" placeholder="Address" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <button type="submit">Confirm Order</button>
+    </form>
+    <p class="success" id="successMsg"></p>
+</div>
+<script>
+    function confirmOrder(event) {
+        event.preventDefault();
+        document.getElementById("successMsg").textContent = "Order confirmed successfully!";
+        localStorage.removeItem("cart");
+    }
+</script>
+</body>
+</html>
