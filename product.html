@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Products</title>
+  <style>
+    body {
+      background-color: rgb(178, 221, 194);
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background-color: rgb(187, 231, 203);
+      padding: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+    }
+
+    .product-card {
+      border: 5px solid rgb(0, 228, 84);
+      border-radius: 15px;
+      padding: 20px;
+      width: 200px;
+      text-align: center;
+    }
+
+    #products-container {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+      justify-content: center;
+    }
+
+    #add-form {
+      max-width: 400px;
+      margin: 20px auto;
+      background: rgb(0, 228, 84);
+      padding: 20px;
+      border-radius: 10px;
+      display: none;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+
+    .admin-section {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <a href="products.html">Products</a>
+    <a href="cart.html" id="cart-link">Cart (<span id="cart-count">0</span>)</a>
+    <a href="login.html">login</a>
+    <a href="sign up.html">SignUp</a>
+    <a href="checkout.html">checkout</a>
+    <a href="account.html">account</a>
+  </div>
+
+  <div class="admin-section">
+    <button onclick="toggleForm()">➕ Add Product (Admin)</button>
+  </div>
+
+  <div id="add-form">
+    <h3>Add New Product</h3>
+    <input type="text" id="name" placeholder="Product Name" required>
+    <input type="number" id="price" placeholder="Price" required>
+    <input type="text" id="image" placeholder="Image URL" required>
+    <button onclick="addProduct()">Add</button>
+  </div>
+
+  <div id="products-container"></div>
+
+  <script>
+    const defaultProducts = [
+      { name: "Panadol Extra", price: 25 },
+      { name: "Vitamin C", price: 30},
+    ];
+
+    if (!localStorage.getItem("products")) {
+      localStorage.setItem("products", JSON.stringify(defaultProducts));
+    }
+
+
+    function loadProducts() {
+      const container = document.getElementById("products-container");
+      container.innerHTML = "";
+
+      const products = JSON.parse(localStorage.getItem("products")) || [];
+
+      products.forEach(product => {
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = `
+          <h4>${product.name}</h4>
+          <p>${product.price} EGP</p>
+          <button onclick="addToCart('${product.name}', ${product.price})">Add to Cart</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+
+    function addToCart(name, price) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({ name, price });
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      alert("Product added to cart!");
+      updateCartCount();
+    }
+
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const cartCountSpan = document.getElementById("cart-count");
+      cartCountSpan.textContent = cart.length;
+    }
+
+    window.onload = () => {
+      loadProducts();
+      updateCartCount();
+    };
+  </script>
+
+
+</body>
+</html>
